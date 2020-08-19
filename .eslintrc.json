@@ -1,6 +1,6 @@
 {
   "env": {
-    "es6": true,
+    "es2020": true,
     "node": true,
     "jest": true
   },
@@ -27,13 +27,14 @@
         "argsIgnorePattern": "_"
       }
     ],
+	  "no-underscore-dangle": "off",
     "no-useless-constructor": "off",
-    "@typescript-eslint/interface-name-prefix": [
-      "error",
-      {
-        "prefixWithI": "always"
-      }
-    ],
+//    "@typescript-eslint/interface-name-prefix": [
+//      "error",
+//      {
+//        "prefixWithI": "always"
+//      }
+//    ],
     "@typescript-eslint/camelcase": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",

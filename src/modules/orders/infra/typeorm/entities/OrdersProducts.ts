@@ -1,34 +1,46 @@
 import {
-  Entity,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  JoinColumn,
-  PrimaryGeneratedColumn,
-  ManyToOne,
+	Entity,
+	Column,
+	CreateDateColumn,
+	UpdateDateColumn,
+	JoinColumn,
+	PrimaryGeneratedColumn,
+	ManyToOne,
 } from 'typeorm';
 
 import Order from '@modules/orders/infra/typeorm/entities/Order';
 import Product from '@modules/products/infra/typeorm/entities/Product';
 
+@Entity('orders_products')
 class OrdersProducts {
-  id: string;
+	@PrimaryGeneratedColumn('uuid')
+	id: string;
 
-  order: Order;
+	@Column()
+	order_id: string;
 
-  product: Product;
+	@ManyToOne(() => Order, order => order.order_products)
+	@JoinColumn({ name: 'order_id' })
+	order: Order;
 
-  product_id: string;
+	@Column()
+	product_id: string;
 
-  order_id: string;
+	@ManyToOne(() => Product, (product: Product) => product.order_products)
+	@JoinColumn({ name: 'product_id' })
+	product: Product;
 
-  price: number;
+	@Column({ type: 'decimal', precision: 10, scale: 2 })
+	price: number;
 
-  quantity: number;
+	@Column('int')
+	quantity: number;
 
-  created_at: Date;
+	@CreateDateColumn()
+	created_at: Date;
 
-  updated_at: Date;
+	@UpdateDateColumn()
+	updated_at: Date;
 }
 
 export default OrdersProducts;
